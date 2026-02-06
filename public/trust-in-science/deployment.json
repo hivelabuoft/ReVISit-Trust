@@ -1,0 +1,7 @@
+{
+    "COMPLETION_CODE": "YOUR_COMPLETION_CODE",
+    "CONTACT_EMAIL": "contact@revisit.dev",
+    "STUDY_VERSION": "pilot",
+    "PLATFORM_PARAM": "PROLIFIC_PID",
+    "PLATFORM_REDIRECT_BASE": "https://app.prolific.com/submissions/complete"
+}

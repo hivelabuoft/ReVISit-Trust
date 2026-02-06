@@ -1,0 +1,115 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Global Temperature Anomaly (1950–2024)",
+    "subtitle": "Deviation from 1951–1980 average (°C) — Source: NASA GISS",
+    "fontSize": 18,
+    "subtitleFontSize": 12,
+    "subtitleColor": "#666"
+  },
+  "width": 700,
+  "height": 380,
+  "data": {
+    "values": [
+      {"year": 1950, "anomaly": -0.16},
+      {"year": 1952, "anomaly": 0.02},
+      {"year": 1954, "anomaly": -0.12},
+      {"year": 1956, "anomaly": -0.14},
+      {"year": 1958, "anomaly": 0.06},
+      {"year": 1960, "anomaly": -0.01},
+      {"year": 1962, "anomaly": 0.04},
+      {"year": 1964, "anomaly": -0.20},
+      {"year": 1966, "anomaly": -0.03},
+      {"year": 1968, "anomaly": -0.07},
+      {"year": 1970, "anomaly": 0.02},
+      {"year": 1972, "anomaly": 0.01},
+      {"year": 1974, "anomaly": -0.07},
+      {"year": 1976, "anomaly": -0.10},
+      {"year": 1978, "anomaly": 0.07},
+      {"year": 1980, "anomaly": 0.26},
+      {"year": 1982, "anomaly": 0.12},
+      {"year": 1984, "anomaly": 0.15},
+      {"year": 1986, "anomaly": 0.18},
+      {"year": 1988, "anomaly": 0.39},
+      {"year": 1990, "anomaly": 0.45},
+      {"year": 1992, "anomaly": 0.23},
+      {"year": 1994, "anomaly": 0.31},
+      {"year": 1996, "anomaly": 0.33},
+      {"year": 1998, "anomaly": 0.63},
+      {"year": 2000, "anomaly": 0.40},
+      {"year": 2002, "anomaly": 0.63},
+      {"year": 2004, "anomaly": 0.54},
+      {"year": 2006, "anomaly": 0.62},
+      {"year": 2008, "anomaly": 0.51},
+      {"year": 2010, "anomaly": 0.72},
+      {"year": 2012, "anomaly": 0.63},
+      {"year": 2014, "anomaly": 0.75},
+      {"year": 2016, "anomaly": 1.01},
+      {"year": 2018, "anomaly": 0.83},
+      {"year": 2020, "anomaly": 1.02},
+      {"year": 2022, "anomaly": 0.89},
+      {"year": 2024, "anomaly": 1.29}
+    ]
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "bar",
+        "cornerRadiusTopLeft": 2,
+        "cornerRadiusTopRight": 2,
+        "cornerRadiusBottomLeft": 2,
+        "cornerRadiusBottomRight": 2
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "ordinal",
+          "title": "Year",
+          "axis": {
+            "labelAngle": -45,
+            "values": [1950, 1960, 1970, 1980, 1990, 2000, 2010, 2020, 2024]
+          }
+        },
+        "y": {
+          "field": "anomaly",
+          "type": "quantitative",
+          "title": "Temperature Anomaly (°C)",
+          "scale": {"domain": [-0.3, 1.4]}
+        },
+        "color": {
+          "field": "anomaly",
+          "type": "quantitative",
+          "scale": {
+            "scheme": "redblue",
+            "reverse": true,
+            "domain": [-0.3, 1.3]
+          },
+          "legend": null
+        },
+        "tooltip": [
+          {"field": "year", "type": "ordinal", "title": "Year"},
+          {"field": "anomaly", "type": "quantitative", "title": "Anomaly (°C)", "format": "+.2f"}
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "rule",
+        "strokeDash": [4, 4],
+        "color": "#333",
+        "strokeWidth": 1
+      },
+      "encoding": {
+        "y": {"datum": 0}
+      }
+    }
+  ],
+  "config": {
+    "view": {"stroke": null},
+    "axis": {
+      "gridColor": "#eee",
+      "domainColor": "#999",
+      "tickColor": "#999"
+    }
+  }
+}

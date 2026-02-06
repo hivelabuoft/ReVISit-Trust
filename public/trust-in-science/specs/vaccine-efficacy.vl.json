@@ -1,0 +1,105 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "COVID-19 Vaccine Efficacy Against Symptomatic Infection",
+    "subtitle": "Based on Phase III clinical trial results — Source: WHO, peer-reviewed publications",
+    "fontSize": 18,
+    "subtitleFontSize": 12,
+    "subtitleColor": "#666"
+  },
+  "width": 600,
+  "height": 350,
+  "data": {
+    "values": [
+      {"vaccine": "Pfizer-BioNTech", "efficacy": 95, "lower": 90.3, "upper": 97.6, "type": "mRNA"},
+      {"vaccine": "Moderna", "efficacy": 94.1, "lower": 89.3, "upper": 96.8, "type": "mRNA"},
+      {"vaccine": "Johnson & Johnson", "efficacy": 66.1, "lower": 55.0, "upper": 74.8, "type": "Viral vector"},
+      {"vaccine": "AstraZeneca", "efficacy": 70.4, "lower": 54.8, "upper": 80.6, "type": "Viral vector"},
+      {"vaccine": "Novavax", "efficacy": 90.4, "lower": 82.9, "upper": 94.6, "type": "Protein subunit"},
+      {"vaccine": "Sinovac", "efficacy": 51.0, "lower": 36.0, "upper": 62.0, "type": "Inactivated"},
+      {"vaccine": "Sinopharm", "efficacy": 79.3, "lower": 65.4, "upper": 86.7, "type": "Inactivated"},
+      {"vaccine": "Sputnik V", "efficacy": 91.6, "lower": 85.6, "upper": 95.2, "type": "Viral vector"}
+    ]
+  },
+  "encoding": {
+    "y": {
+      "field": "vaccine",
+      "type": "nominal",
+      "title": null,
+      "sort": "-x",
+      "axis": {"labelFontSize": 12}
+    }
+  },
+  "layer": [
+    {
+      "mark": {"type": "bar", "height": 20, "cornerRadiusEnd": 3},
+      "encoding": {
+        "x": {
+          "field": "efficacy",
+          "type": "quantitative",
+          "title": "Efficacy (%)",
+          "scale": {"domain": [0, 100]}
+        },
+        "color": {
+          "field": "type",
+          "type": "nominal",
+          "title": "Vaccine Type",
+          "scale": {
+            "domain": ["mRNA", "Viral vector", "Protein subunit", "Inactivated"],
+            "range": ["#2171b5", "#e6550d", "#31a354", "#756bb1"]
+          }
+        },
+        "tooltip": [
+          {"field": "vaccine", "type": "nominal", "title": "Vaccine"},
+          {"field": "efficacy", "type": "quantitative", "title": "Efficacy (%)", "format": ".1f"},
+          {"field": "lower", "type": "quantitative", "title": "95% CI Lower", "format": ".1f"},
+          {"field": "upper", "type": "quantitative", "title": "95% CI Upper", "format": ".1f"},
+          {"field": "type", "type": "nominal", "title": "Type"}
+        ]
+      }
+    },
+    {
+      "mark": {"type": "rule", "strokeWidth": 2},
+      "encoding": {
+        "x": {"field": "lower", "type": "quantitative"},
+        "x2": {"field": "upper"},
+        "color": {"value": "#333"}
+      }
+    },
+    {
+      "mark": {"type": "tick", "strokeWidth": 2, "size": 12},
+      "encoding": {
+        "x": {"field": "lower", "type": "quantitative"},
+        "color": {"value": "#333"}
+      }
+    },
+    {
+      "mark": {"type": "tick", "strokeWidth": 2, "size": 12},
+      "encoding": {
+        "x": {"field": "upper", "type": "quantitative"},
+        "color": {"value": "#333"}
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 5,
+        "fontSize": 11,
+        "fontWeight": "bold"
+      },
+      "encoding": {
+        "x": {"field": "upper", "type": "quantitative"},
+        "text": {"field": "efficacy", "type": "quantitative", "format": ".1f"},
+        "color": {"value": "#333"}
+      }
+    }
+  ],
+  "config": {
+    "view": {"stroke": null},
+    "axis": {
+      "gridColor": "#eee",
+      "domainColor": "#999"
+    }
+  }
+}

@@ -1,0 +1,105 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Electricity Generation by Source (2023)",
+    "subtitle": "Percentage share of total electricity generation — Source: IEA World Energy Outlook",
+    "fontSize": 18,
+    "subtitleFontSize": 12,
+    "subtitleColor": "#666"
+  },
+  "width": 600,
+  "height": 380,
+  "data": {
+    "values": [
+      {"country": "United States", "source": "Coal", "share": 16},
+      {"country": "United States", "source": "Natural Gas", "share": 43},
+      {"country": "United States", "source": "Nuclear", "share": 19},
+      {"country": "United States", "source": "Wind", "share": 10},
+      {"country": "United States", "source": "Solar", "share": 6},
+      {"country": "United States", "source": "Hydro", "share": 6},
+
+      {"country": "China", "source": "Coal", "share": 60},
+      {"country": "China", "source": "Natural Gas", "share": 3},
+      {"country": "China", "source": "Nuclear", "share": 5},
+      {"country": "China", "source": "Wind", "share": 9},
+      {"country": "China", "source": "Solar", "share": 6},
+      {"country": "China", "source": "Hydro", "share": 14},
+
+      {"country": "Germany", "source": "Coal", "share": 26},
+      {"country": "Germany", "source": "Natural Gas", "share": 11},
+      {"country": "Germany", "source": "Nuclear", "share": 0},
+      {"country": "Germany", "source": "Wind", "share": 32},
+      {"country": "Germany", "source": "Solar", "share": 12},
+      {"country": "Germany", "source": "Hydro", "share": 3},
+
+      {"country": "France", "source": "Coal", "share": 1},
+      {"country": "France", "source": "Natural Gas", "share": 6},
+      {"country": "France", "source": "Nuclear", "share": 65},
+      {"country": "France", "source": "Wind", "share": 10},
+      {"country": "France", "source": "Solar", "share": 5},
+      {"country": "France", "source": "Hydro", "share": 11},
+
+      {"country": "Brazil", "source": "Coal", "share": 3},
+      {"country": "Brazil", "source": "Natural Gas", "share": 8},
+      {"country": "Brazil", "source": "Nuclear", "share": 2},
+      {"country": "Brazil", "source": "Wind", "share": 13},
+      {"country": "Brazil", "source": "Solar", "share": 6},
+      {"country": "Brazil", "source": "Hydro", "share": 63},
+
+      {"country": "India", "source": "Coal", "share": 73},
+      {"country": "India", "source": "Natural Gas", "share": 4},
+      {"country": "India", "source": "Nuclear", "share": 3},
+      {"country": "India", "source": "Wind", "share": 5},
+      {"country": "India", "source": "Solar", "share": 7},
+      {"country": "India", "source": "Hydro", "share": 9}
+    ]
+  },
+  "mark": {"type": "bar", "cornerRadiusEnd": 2},
+  "encoding": {
+    "y": {
+      "field": "country",
+      "type": "nominal",
+      "title": null,
+      "sort": ["United States", "China", "Germany", "France", "Brazil", "India"],
+      "axis": {"labelFontSize": 12}
+    },
+    "x": {
+      "field": "share",
+      "type": "quantitative",
+      "title": "Share of Electricity Generation (%)",
+      "stack": "normalize",
+      "axis": {"format": ".0%"}
+    },
+    "color": {
+      "field": "source",
+      "type": "nominal",
+      "title": "Energy Source",
+      "sort": ["Coal", "Natural Gas", "Nuclear", "Wind", "Solar", "Hydro"],
+      "scale": {
+        "domain": ["Coal", "Natural Gas", "Nuclear", "Wind", "Solar", "Hydro"],
+        "range": ["#4a4a4a", "#d4a574", "#9467bd", "#5dade2", "#f4d03f", "#2ecc71"]
+      }
+    },
+    "tooltip": [
+      {"field": "country", "type": "nominal", "title": "Country"},
+      {"field": "source", "type": "nominal", "title": "Source"},
+      {"field": "share", "type": "quantitative", "title": "Share (%)", "format": ".0f"}
+    ],
+    "order": {
+      "field": "source",
+      "sort": "ascending"
+    }
+  },
+  "config": {
+    "view": {"stroke": null},
+    "axis": {
+      "gridColor": "#eee",
+      "domainColor": "#999"
+    },
+    "legend": {
+      "orient": "bottom",
+      "columns": 6,
+      "labelFontSize": 11
+    }
+  }
+}

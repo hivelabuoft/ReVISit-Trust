@@ -1,0 +1,372 @@
+{
+    "$schema": "https://raw.githubusercontent.com/revisit-studies/study/main/src/parser/StudyConfigSchema.json",
+    "studyMetadata": {
+        "title": "Trust in Public-Facing Scientific Visualizations",
+        "version": "pilot",
+        "authors": [
+            "HIVE Lab"
+        ],
+        "date": "2026-02-06",
+        "description": "A study examining how people perceive and trust scientific visualizations encountered in public media, government reports, and online sources.",
+        "organizations": [
+            "University of Utah",
+            "WPI"
+        ]
+    },
+    "uiConfig": {
+        "contactEmail": "contact@revisit.dev",
+        "helpTextPath": "trust-in-science/assets/help.md",
+        "logoPath": "revisitAssets/revisitLogoSquare.svg",
+        "withProgressBar": true,
+        "autoDownloadStudy": false,
+        "withSidebar": true,
+        "recordAudio": true,
+        "urlParticipantIdParam": "PROLIFIC_PID",
+        "participantNameField": "introduction.prolificId",
+        "studyEndMsg": "**Thank you for completing the study.** You may click this link to return to Prolific: [Complete Study](https://app.prolific.com/submissions/complete?cc=YOUR_COMPLETION_CODE&PROLIFIC_PID={PARTICIPANT_ID})"
+    },
+    "importedLibraries": [
+        "mic-check"
+    ],
+    "baseComponents": {
+        "vis-stimulus": {
+            "type": "vega",
+            "instructionLocation": "aboveStimulus",
+            "withActions": false,
+            "recordAudio": true,
+            "nextButtonLocation": "sidebar",
+            "response": [
+                {
+                    "id": "think-aloud-prompt",
+                    "type": "textOnly",
+                    "location": "sidebar",
+                    "prompt": "**Think Aloud:** Please describe what you see and your thoughts about this visualization. Your audio is being recorded."
+                },
+                {
+                    "id": "trust-rating",
+                    "prompt": "How much do you trust the information presented in this visualization?",
+                    "required": true,
+                    "location": "sidebar",
+                    "type": "likert",
+                    "leftLabel": "Do Not Trust At All",
+                    "rightLabel": "Trust Completely",
+                    "numItems": 7
+                },
+                {
+                    "id": "data-source-credibility",
+                    "prompt": "How credible does the data source appear to be?",
+                    "required": true,
+                    "location": "sidebar",
+                    "type": "radio",
+                    "options": [
+                        "Very credible",
+                        "Somewhat credible",
+                        "Neutral",
+                        "Somewhat not credible",
+                        "Not credible at all"
+                    ]
+                },
+                {
+                    "id": "visualization-clarity",
+                    "prompt": "How clear and easy to understand is this visualization?",
+                    "required": true,
+                    "location": "sidebar",
+                    "type": "radio",
+                    "options": [
+                        "Very clear",
+                        "Somewhat clear",
+                        "Neutral",
+                        "Somewhat confusing",
+                        "Very confusing"
+                    ]
+                },
+                {
+                    "id": "perceived-intent",
+                    "prompt": "What do you think is the primary intent of this visualization?",
+                    "required": true,
+                    "location": "sidebar",
+                    "type": "radio",
+                    "options": [
+                        "To inform the public objectively",
+                        "To persuade or advocate for a position",
+                        "To simplify complex data for general audiences",
+                        "To mislead or manipulate the viewer",
+                        "Unsure"
+                    ]
+                }
+            ]
+        }
+    },
+    "components": {
+        "introduction": {
+            "type": "markdown",
+            "path": "trust-in-science/assets/introduction.md",
+            "response": [
+                {
+                    "id": "prolificId",
+                    "prompt": "Please enter your Prolific ID",
+                    "location": "belowStimulus",
+                    "type": "shortText",
+                    "placeholder": "Prolific ID",
+                    "paramCapture": "PROLIFIC_PID"
+                }
+            ]
+        },
+        "think-aloud-instructions": {
+            "type": "markdown",
+            "path": "trust-in-science/assets/think-aloud-instructions.md",
+            "response": []
+        },
+        "vis-climate-chart": {
+            "baseComponent": "vis-stimulus",
+            "path": "trust-in-science/specs/climate-temperature.vl.json",
+            "instruction": "Examine this climate change visualization showing global temperature anomalies over time. Think aloud as you study it, then answer the questions in the sidebar."
+        },
+        "vis-vaccine-efficacy": {
+            "baseComponent": "vis-stimulus",
+            "path": "trust-in-science/specs/vaccine-efficacy.vl.json",
+            "instruction": "Examine this visualization showing vaccine efficacy data from clinical trials. Think aloud as you study it, then answer the questions in the sidebar."
+        },
+        "vis-energy-sources": {
+            "baseComponent": "vis-stimulus",
+            "path": "trust-in-science/specs/energy-sources.vl.json",
+            "instruction": "Examine this visualization showing the breakdown of energy sources by country. Think aloud as you study it, then answer the questions in the sidebar."
+        },
+        "mc-climate": {
+            "type": "questionnaire",
+            "response": [
+                {
+                    "id": "mc-climate-trend",
+                    "prompt": "Based on the climate visualization you just saw, what was the overall trend shown?",
+                    "required": true,
+                    "location": "aboveStimulus",
+                    "type": "radio",
+                    "options": [
+                        "Temperatures have been steadily increasing",
+                        "Temperatures have been steadily decreasing",
+                        "Temperatures have remained relatively stable",
+                        "Temperatures show no clear pattern"
+                    ]
+                },
+                {
+                    "id": "mc-climate-misleading",
+                    "prompt": "Did you notice any elements in the visualization that could be considered misleading?",
+                    "required": true,
+                    "location": "aboveStimulus",
+                    "type": "radio",
+                    "options": [
+                        "Yes — the axis scales were manipulated",
+                        "Yes — important context or data was missing",
+                        "Yes — the color choices were biased",
+                        "No — the visualization appeared fair and accurate",
+                        "I'm not sure"
+                    ]
+                },
+                {
+                    "id": "mc-climate-share",
+                    "prompt": "Would you feel comfortable sharing this visualization on social media as a trustworthy source?",
+                    "required": true,
+                    "location": "aboveStimulus",
+                    "type": "radio",
+                    "options": [
+                        "Yes, without hesitation",
+                        "Yes, but with added context or caveats",
+                        "No, I would want to verify the data first",
+                        "No, I do not trust it enough to share"
+                    ]
+                }
+            ]
+        },
+        "mc-vaccine": {
+            "type": "questionnaire",
+            "response": [
+                {
+                    "id": "mc-vaccine-message",
+                    "prompt": "What was the main message conveyed by the vaccine efficacy visualization?",
+                    "required": true,
+                    "location": "aboveStimulus",
+                    "type": "radio",
+                    "options": [
+                        "All vaccines shown are equally effective",
+                        "Some vaccines are significantly more effective than others",
+                        "Vaccine efficacy data is unreliable",
+                        "The visualization did not clearly convey a main message"
+                    ]
+                },
+                {
+                    "id": "mc-vaccine-design",
+                    "prompt": "How well did the visualization design support your understanding of the data?",
+                    "required": true,
+                    "location": "aboveStimulus",
+                    "type": "radio",
+                    "options": [
+                        "The design made the data very easy to understand",
+                        "The design was adequate but could be improved",
+                        "The design made the data harder to understand",
+                        "The design was confusing or misleading"
+                    ]
+                },
+                {
+                    "id": "mc-vaccine-decision",
+                    "prompt": "Would this visualization influence your health-related decisions?",
+                    "required": true,
+                    "location": "aboveStimulus",
+                    "type": "radio",
+                    "options": [
+                        "Yes, significantly",
+                        "Yes, somewhat",
+                        "No, I would seek additional sources",
+                        "No, I do not trust visualizations for health decisions"
+                    ]
+                }
+            ]
+        },
+        "mc-energy": {
+            "type": "questionnaire",
+            "response": [
+                {
+                    "id": "mc-energy-takeaway",
+                    "prompt": "What was your main takeaway from the energy sources visualization?",
+                    "required": true,
+                    "location": "aboveStimulus",
+                    "type": "radio",
+                    "options": [
+                        "Renewable energy is growing rapidly worldwide",
+                        "Fossil fuels still dominate global energy production",
+                        "Energy source distribution varies greatly by country",
+                        "The data was unclear or hard to interpret"
+                    ]
+                },
+                {
+                    "id": "mc-energy-bias",
+                    "prompt": "Do you think this visualization presents the energy data in a balanced way?",
+                    "required": true,
+                    "location": "aboveStimulus",
+                    "type": "radio",
+                    "options": [
+                        "Yes, it appears balanced and objective",
+                        "It slightly favors renewable energy",
+                        "It slightly favors fossil fuels",
+                        "It is noticeably biased in its presentation",
+                        "I cannot tell"
+                    ]
+                },
+                {
+                    "id": "mc-energy-policy",
+                    "prompt": "Would you use this visualization to support an argument in a policy discussion?",
+                    "required": true,
+                    "location": "aboveStimulus",
+                    "type": "radio",
+                    "options": [
+                        "Yes, it seems reliable enough",
+                        "Only after verifying the underlying data",
+                        "No, I would need more detailed data",
+                        "No, I do not find it trustworthy"
+                    ]
+                }
+            ]
+        },
+        "post-study-questionnaire": {
+            "type": "questionnaire",
+            "response": [
+                {
+                    "id": "general-trust-sci-viz",
+                    "prompt": "In general, how much do you trust scientific visualizations you encounter in the media?",
+                    "required": true,
+                    "location": "aboveStimulus",
+                    "type": "likert",
+                    "leftLabel": "Do Not Trust At All",
+                    "rightLabel": "Trust Completely",
+                    "numItems": 7
+                },
+                {
+                    "id": "factors-increase-trust",
+                    "prompt": "Which factors increase your trust in a scientific visualization? (Select all that apply)",
+                    "required": true,
+                    "location": "aboveStimulus",
+                    "type": "checkbox",
+                    "options": [
+                        "Clear data source citation",
+                        "Published by a reputable organization",
+                        "Simple and easy to understand design",
+                        "Consistent with what I already know",
+                        "Includes uncertainty or error information",
+                        "Peer-reviewed or expert-endorsed"
+                    ]
+                },
+                {
+                    "id": "factors-decrease-trust",
+                    "prompt": "Which factors decrease your trust in a scientific visualization? (Select all that apply)",
+                    "required": true,
+                    "location": "aboveStimulus",
+                    "type": "checkbox",
+                    "options": [
+                        "No data source cited",
+                        "Published by an unknown or biased source",
+                        "Overly complex or hard to read",
+                        "Contradicts what I already know",
+                        "Uses misleading axis scales or visual encodings",
+                        "Sensationalist or emotionally charged design"
+                    ]
+                },
+                {
+                    "id": "sci-viz-literacy",
+                    "prompt": "How would you rate your ability to interpret scientific charts and graphs?",
+                    "required": true,
+                    "location": "aboveStimulus",
+                    "type": "radio",
+                    "options": [
+                        "Expert — I work with data regularly",
+                        "Advanced — I can interpret most charts easily",
+                        "Intermediate — I understand common chart types",
+                        "Beginner — I sometimes struggle with charts",
+                        "Novice — I find most charts difficult to understand"
+                    ]
+                },
+                {
+                    "id": "open-feedback",
+                    "prompt": "Any additional thoughts on trust in scientific visualizations? (Optional)",
+                    "required": false,
+                    "location": "aboveStimulus",
+                    "type": "longText",
+                    "placeholder": "Share any additional thoughts..."
+                }
+            ]
+        }
+    },
+    "sequence": {
+        "order": "fixed",
+        "components": [
+            "introduction",
+            "$mic-check.co.audioTest",
+            "think-aloud-instructions",
+            {
+                "order": "latinSquare",
+                "components": [
+                    {
+                        "order": "fixed",
+                        "components": [
+                            "vis-climate-chart",
+                            "mc-climate"
+                        ]
+                    },
+                    {
+                        "order": "fixed",
+                        "components": [
+                            "vis-vaccine-efficacy",
+                            "mc-vaccine"
+                        ]
+                    },
+                    {
+                        "order": "fixed",
+                        "components": [
+                            "vis-energy-sources",
+                            "mc-energy"
+                        ]
+                    }
+                ]
+            },
+            "post-study-questionnaire"
+        ]
+    }
+}

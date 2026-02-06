@@ -1,6 +1,7 @@
 {
   "$schema": "https://raw.githubusercontent.com/revisit-studies/study/v2.3.2/src/parser/GlobalConfigSchema.json",
   "configsList": [
+    "trust-in-science",
     "tutorial",
     "tutorial-replication",
     "demo-html",
@@ -52,6 +53,9 @@
     "test-step-logic"
   ],
   "configs": {
+    "trust-in-science": {
+      "path": "trust-in-science/config.json"
+    },
     "tutorial": {
       "path": "tutorial/config.json"
     },
