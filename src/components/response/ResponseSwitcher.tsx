@@ -7,7 +7,7 @@ import {
 } from '../../parser/types';
 import { CheckBoxInput } from './CheckBoxInput';
 import { DropdownInput } from './DropdownInput';
-import { Reactive } from './ReactiveInput';
+import { ReactiveInput } from './ReactiveInput';
 import { LikertInput } from './LikertInput';
 import { NumericInput } from './NumericInput';
 import { RadioInput } from './RadioInput';
@@ -25,6 +25,8 @@ import { getSequenceFlatMap } from '../../utils/getSequenceFlatMap';
 import { useCurrentStep } from '../../routes/utils';
 import { TextOnlyInput } from './TextOnlyInput';
 import { useFetchStylesheet } from '../../utils/fetchStylesheet';
+import { parseStringOptionValue } from '../../utils/stringOptions';
+import { getDefaultFieldValue } from './utils';
 
 export function ResponseSwitcher({
   response,
@@ -110,12 +112,17 @@ export function ResponseSwitcher({
       return searchParams.get(response.paramCapture) || '';
     }
 
+    const defaultFieldValue = getDefaultFieldValue(response);
+    if (defaultFieldValue !== null) {
+      return defaultFieldValue;
+    }
+
     if (response.type === 'reactive' || response.type === 'checkbox') {
       return [];
     }
 
     if (response.type === 'matrix-radio' || response.type === 'matrix-checkbox') {
-      return Object.fromEntries(response.questionOptions.map((entry) => [entry, '']));
+      return Object.fromEntries(response.questionOptions.map((entry) => [parseStringOptionValue(entry), '']));
     }
 
     if (response.type === 'slider' && response.startingValue) {
@@ -203,6 +210,7 @@ export function ResponseSwitcher({
         index={index}
         enumerateQuestions={enumerateQuestions}
         otherValue={otherValue}
+        dontKnowCheckbox={dontKnowCheckbox as { checked?: boolean; onChange?: (value: boolean) => void }}
       />
       )}
       {(response.type === 'ranking-sublist' || response.type === 'ranking-categorical' || response.type === 'ranking-pairwise') && (
@@ -215,7 +223,7 @@ export function ResponseSwitcher({
       />
       )}
       {response.type === 'reactive' && (
-      <Reactive
+      <ReactiveInput
         response={response}
         answer={ans as { value: string[] }}
         index={index}
